@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<form action="http://127.0.0.1:8000/addTodo/" method="post">
+    {% csrf_token %}
+    <input type="text" name="todo" placeholder="Add tasks">
+    <input type="submit" value="Add">
+</form>
+
+    {% for task in tasks %}
+    <div class="container">
+        <div class="row">
+            <div class = "col-sm-12 col-lg-6">
+                {{ task.task_name }}<br>{{ task.created_at }}
+            </div>
+            <div class = "col-sm-12 col-lg-6">
+                <button class= "success" id=completed.btn">Completed</button>
+                <button class= "primary" id="update.btn">Update</button>
+                <button class= "danger" id="delete.btn">Delete</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
