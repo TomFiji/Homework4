@@ -4,6 +4,12 @@ from .models import Todo
 
 
 # Create your views here.
+def delete(request, todo_id):
+    tasks = Todo.objects.get(pk=todo_id)
+    context = {'tasks': tasks}
+    return render(request, 'delete.html', context)
+
+
 def index(request):
     tasks = Todo.objects.all()
     context = {'tasks': tasks}
@@ -16,11 +22,6 @@ def addTodo(request):
         Todo.objects.create(task_name=todo)
         return redirect('index')
     return render(request, 'index.html')
-
-
-def delete(request):
-    render("Delete")
-
 
 def update(request):
     render("Update")
