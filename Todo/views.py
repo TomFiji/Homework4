@@ -5,8 +5,10 @@ from .models import Todo
 
 # Create your views here.
 def delete(request, todo_id):
-    tasks = Todo.objects.get(pk=todo_id)
-    context = {'tasks': tasks}
+    task = Todo.objects.get(pk=todo_id)
+    if request.method == 'POST':
+        task.delete()
+    context = {'task': task}
     return render(request, 'delete.html', context)
 
 

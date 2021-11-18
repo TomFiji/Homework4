@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
-{% load static %}
+{% block body %}
 <div class="card">
     <div class="card-header">
         Delete Task
     </div>
     <div class="card-body">
-        <b>Are you sure that you want to delete {{ task.task_name }}</b>
+        <b>Are you sure that you want to delete {{ task.task_name }}?</b>
+        <form action="{% url 'delete' product.id %}" method="POST">
+            <input type="submit" value="Yes, delete">
+        </form>
+        <form action="{% url 'index' %}">
+            <input type="submit" value="No, go back">
+        </form>
     </div>
 </div>
+{% endblock %}
