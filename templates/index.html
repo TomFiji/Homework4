@@ -1,21 +1,27 @@
 {% extends 'base.html' %}
 {% block body %}
-<form action="http://127.0.0.1:8000/addTodo" method="post">
-    {% csrf_token %}
-    <input type="text" name="todo" placeholder="Add tasks">
-    <input type="submit" value="Add">
-</form>
+    <div class="container center">
+        <div class="row">
+            <div class="col-12">
+                <form action="{% url 'addTodo' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="todo" placeholder="Add tasks">
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+    </div>
 
     {% for task in tasks %}
-    <div class="container">
+    <div class="container text-center border rounded">
         <div class="row">
             <div class = "col-sm-12 col-lg-6">
-                {{ task.task_name }}<br>{{ task.created_at }}
+                {{ task.task_name }}<br>Created at: {{ task.created_at }}
             </div>
             <div class = "col-sm-12 col-lg-6">
-                <button class= "success" id=completed.btn">Completed</button>
-                <a href=""><button class= "primary">Update</button></a>
-                <button><a href="{% url 'delete' task.id %}">Delete</a></button>
+                <button class= "btn btn-success" id=completed.btn">Completed</button>
+                <a href="{% url 'update' task.id %}"><button class="btn btn-primary">Update</button></a>
+                <a href="{% url 'delete' task.id %}"><button class="btn btn-danger">Delete</button></a>
             </div>
         </div>
     </div>

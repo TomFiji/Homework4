@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .models import Todo
+from .forms import TodoForm
 
 
 # Create your views here.
@@ -8,8 +9,10 @@ def delete(request, todo_id):
     task = Todo.objects.get(pk=todo_id)
     if request.method == 'POST':
         task.delete()
-    context = {'task': task}
-    return render(request, 'delete.html', context)
+        return redirect('index')
+    else:
+        context = {'task': task}
+        return render(request, 'delete.html', context)
 
 
 def index(request):
@@ -25,5 +28,13 @@ def addTodo(request):
         return redirect('index')
     return render(request, 'index.html')
 
-def update(request):
-    render("Update")
+def update(request, todo_id):
+    todo = Todo.objects.get(pk=todo_id)
+    form = TodoForm(request.POST or None, instance=todo)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    context = {'form': form}
+    return render(request, 'update.html', context)
+

@@ -6,12 +6,14 @@
     </div>
     <div class="card-body">
         <b>Are you sure that you want to delete {{ task.task_name }}?</b>
-        <form action="{% url 'delete' product.id %}" method="POST">
+        <div class="row">
+        <a href="{% url 'index' %}"><button class="btn btn-info">No, go back</button></a>
+        <form action="" method="POST">
+            {% csrf_token %}
             <input type="submit" value="Yes, delete">
         </form>
-        <form action="{% url 'index' %}">
-            <input type="submit" value="No, go back">
-        </form>
+
+        </div>
     </div>
 </div>
 {% endblock %}

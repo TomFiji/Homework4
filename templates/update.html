@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            Update Task
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">Task</div>
+                <div class="col">Completed</div>
+            </div>
+            <div class="row">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form }} <br>
+                    <input type="submit" value="Update">
+                    <a href="{% url 'index' %}"><- Go back</a>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}
