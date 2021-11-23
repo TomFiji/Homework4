@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 {% block body %}
-    <div class="card">
+    <div class="card" style="width: 75%">
         <div class="card-header">
             Update Task
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col">Task</div>
-                <div class="col">Completed</div>
-            </div>
-            <div class="row">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form }} <br>
-                    <input type="submit" value="Update">
-                    <a href="{% url 'index' %}"><- Go back</a>
-                </form>
-            </div>
-            
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-10">
+                        {{ form.task_name.label }}
+                        {{ form.task_name }}
+                    </div>
+                    <div class="col-2 form-check form-switch">
+                        {{ form.completed.label }}
+                        <br>
+                        {{ form.completed }}
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 3px">
+                    <div class="col">
+                        <a href="{% url 'index' %}" class="btn btn-info text-light"><- Go back</a>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 {% endblock %}

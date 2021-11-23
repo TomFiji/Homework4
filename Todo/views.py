@@ -28,6 +28,7 @@ def addTodo(request):
         return redirect('index')
     return render(request, 'index.html')
 
+
 def update(request, todo_id):
     todo = Todo.objects.get(pk=todo_id)
     form = TodoForm(request.POST or None, instance=todo)
@@ -38,3 +39,11 @@ def update(request, todo_id):
     context = {'form': form}
     return render(request, 'update.html', context)
 
+
+def completed(request, todo_id):
+    todo = Todo.objects.get(pk=todo_id)
+    todo.completed = True
+    todo.save()
+    form = TodoForm(instance=todo)
+    form.completed = True
+    return redirect('index')
