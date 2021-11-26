@@ -1,13 +1,9 @@
 .completed{
-    background-clip: content-box;
     background-color: #eeeeee;
-    margin: auto;
-    padding:0;
 
 }
 .not-completed{
     background-color: white;
-    margin: 10px;
 }
 
 /*.card{
@@ -20,11 +16,10 @@
 }
 
 .task-container{
-    border: 1px solid silver;
-    border-radius: .25rem;
-    margin-top: 5px;
+    border: silver solid 1px;
+    border-radius: 0.25rem;
     padding: 10px;
-    background-clip: content-box;
+    margin: 10px;
 
 }
 

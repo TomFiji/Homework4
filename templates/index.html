@@ -11,33 +11,61 @@
 
 
     {% for task in tasks %}
-        {% comment %}<div class="container task-container" style="background-clip: border-box">{% endcomment %}
-        {% if task.completed %}
-            <div class="row completed">
-                <div class = "col-md-12 col-lg-6" style="text-decoration: line-through; text-align: left;">
-                    <p><b>{{ task.task_name }}</b></p>
-                    <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
-                </div>
+        {% if task.created_at < task.updated_at %}
+            {% if task.completed %}
+                <div class="row completed task-container" style="background-clip: padding-box">
+                    <div class = "col-md-12 col-lg-6" style="text-decoration: line-through; text-align: left;">
+                        <p><b>{{ task.task_name }}</b></p>
+                        <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
+                        <p><h6 id="created">Updated at: {{ task.updated_at}}</h6></p>
+                    </div>
 
-                <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
-                    <a href="{% url 'update' task.id %}"><button class="btn btn-primary">Update</button></a>
-                    <a href="{% url 'delete' task.id %}"><button class="btn btn-danger">Delete</button></a>
+                    <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
+                        <a href="{% url 'update' task.id %}"><button class="btn btn-primary">Update</button></a>
+                        <a href="{% url 'delete' task.id %}"><button class="btn btn-danger">Delete</button></a>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="row not-completed task-container">
+                    <div class = "col-md-12 col-lg-6" >
+                        <p><b>{{ task.task_name }}</b></p>
+                        <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
+                        <p><h6 id="created">Updated at: {{ task.updated_at}}</h6></p>
+                    </div>
+                    <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
+                        <a class="btn btn-success" href="{% url 'completed' task.id %}">Completed</a>
+                        <a class="btn btn-primary" href="{% url 'update' task.id %}">Update</a>
+                        <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+
+                    </div>
+                </div>
+            {% endif %}
         {% else %}
-            <div class="row not-completed">
-                <div class = "col-md-12 col-lg-6" >
-                    <p><b>{{ task.task_name }}</b></p>
-                    <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
-                </div>
-                <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
-                    <a class="btn btn-success" href="{% url 'completed' task.id %}">Completed</a>
-                    <a class="btn btn-primary" href="{% url 'update' task.id %}">Update</a>
-                    <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+            {% if task.completed %}
+                <div class="row completed task-container" style="background-clip: padding-box">
+                    <div class = "col-md-12 col-lg-6" style="text-decoration: line-through; text-align: left;">
+                        <p><b>{{ task.task_name }}</b></p>
+                        <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
+                    </div>
 
+                    <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
+                        <a href="{% url 'update' task.id %}"><button class="btn btn-primary">Update</button></a>
+                        <a href="{% url 'delete' task.id %}"><button class="btn btn-danger">Delete</button></a>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="row not-completed task-container">
+                    <div class = "col-md-12 col-lg-6" >
+                        <p><b>{{ task.task_name }}</b></p>
+                        <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
+                    </div>
+                    <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
+                        <a class="btn btn-success" href="{% url 'completed' task.id %}">Completed</a>
+                        <a class="btn btn-primary" href="{% url 'update' task.id %}">Update</a>
+                        <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+                    </div>
+                </div>
+            {% endif %}
         {% endif %}
-
     {% endfor %}
 {% endblock %}

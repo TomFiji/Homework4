@@ -24,9 +24,10 @@ def index(request):
 
 def addTodo(request):
     if request.method == 'POST':
-        todo = request.POST['todo']
-        Todo.objects.create(task_name=todo)
-        return redirect('index')
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
     return render(request, 'index.html')
 
 
