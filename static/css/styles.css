@@ -7,13 +7,12 @@
 }
 .not-completed{
     background-color: white;
-    margin: auto;
-    padding: 0;
+    margin: 10px;
 }
 
-.card{
+/*.card{
     margin: 0 auto;
-}
+}*/
 
 #created{
     font-size: 0.7rem;
@@ -36,16 +35,4 @@
     padding: 0.2em;
     line-height: 2em;
     display: inline-block;
-}
-
-#be_inline{
-    display: inline-block;
-}
-
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  border-radius: 3px;
-  border: gray solid;
 }

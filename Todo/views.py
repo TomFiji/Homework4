@@ -17,7 +17,8 @@ def delete(request, todo_id):
 
 def index(request):
     tasks = Todo.objects.all()
-    context = {'tasks': tasks}
+    form = TodoForm()
+    context = {'tasks': tasks, 'form': form}
     return render(request, 'index.html', context)
 
 

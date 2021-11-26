@@ -1,24 +1,16 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="card" style="width: 75%">
-    <div class="card-header">
-        Delete Task
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <b>Are you sure that you want to delete
-                <h6 id="deleted-task">{{ task.task_name }}</h6>?
-            </b>
+    <div class="card">
+        <div class="card-header">
+            Delete Task
         </div>
-        <div class="row" >
-            <div class="col-3 col-md-12 col-sm-12">
-                <a href="{% url 'index' %}" class="btn btn-info text-light">No, go back</a>
-                <form action="" method="POST" style="display: inline">
-                    {% csrf_token %}
-                    <input class="btn btn-danger text-light" type="submit" value="Yes, delete">
-                </form>
-            </div>
+        <div class="card-body">
+            <h5 class="card-title">Are you sure you want to delete<span id="deleted-task">{{ task.task_name }}</span>?</h5>
+            <a href="{% url 'index' %}" class="btn btn-info text-light">No, go back</a>
+            <form action="" method="POST" style="display: inline">
+                {% csrf_token %}
+                <input class="btn btn-danger text-light" type="submit" value="Yes, delete">
+            </form>
         </div>
     </div>
-</div>
 {% endblock %}

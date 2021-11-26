@@ -1,45 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-12">
-                <form action="{% url 'addTodo' %}" method="post">
-                    {% csrf_token %}
-                    <input  class="form-control" type="text" name="todo" placeholder="Add tasks" aria-label="add_task" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary btn-primary text-light" type="submit" id="button-addon2">Add</button>
-                </form>
-            </div>
+    <form action="{% url 'addTodo' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            {{ form.task_name }}
+            <button class="btn btn-primary" type="submit">Add</button>
         </div>
-    </div>
+    </form>
+
 
     {% for task in tasks %}
-        <div class="container task-container">
+        {% comment %}<div class="container task-container" style="background-clip: border-box">{% endcomment %}
         {% if task.completed %}
             <div class="row completed">
-            <div class = "col-md-12 col-lg-6" style="text-decoration: line-through; text-align: left;">
-                <p><b>{{ task.task_name }}</b></p>
-                <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
-            </div>
-            <div class = "col-md-12 col-lg-6" style="text-align: right">
-                <a href="{% url 'update' task.id %}"><button class="btn btn-primary">Update</button></a>
-                <a href="{% url 'delete' task.id %}"><button class="btn btn-danger">Delete</button></a>
+                <div class = "col-md-12 col-lg-6" style="text-decoration: line-through; text-align: left;">
+                    <p><b>{{ task.task_name }}</b></p>
+                    <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
+                </div>
+
+                <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
+                    <a href="{% url 'update' task.id %}"><button class="btn btn-primary">Update</button></a>
+                    <a href="{% url 'delete' task.id %}"><button class="btn btn-danger">Delete</button></a>
+                </div>
             </div>
         {% else %}
             <div class="row not-completed">
-            <div class = "col-md-12 col-lg-6" style="text-align: left">
-                <p><b>{{ task.task_name }}</b></p>
-                <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
-            </div>
-            <div class = "col-md-12 col-lg-6" style="text-align: right">
-                <a class="btn btn-success" href="{% url 'completed' task.id %}">Completed</a>
-                <a class="btn btn-primary" href="{% url 'update' task.id %}">Update</a>
-                <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
+                <div class = "col-md-12 col-lg-6" >
+                    <p><b>{{ task.task_name }}</b></p>
+                    <p><h6 id="created">Created at: {{ task.created_at }}</h6></p>
+                </div>
+                <div class = "col-md-12 col-lg-6 text-md-start text-lg-end">
+                    <a class="btn btn-success" href="{% url 'completed' task.id %}">Completed</a>
+                    <a class="btn btn-primary" href="{% url 'update' task.id %}">Update</a>
+                    <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete</a>
 
-            </div>
+                </div>
             </div>
         {% endif %}
-    </div>
-    </div>
+
     {% endfor %}
 {% endblock %}

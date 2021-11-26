@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-    <div class="card" style="width: 75%">
+    <div class="card">
         <div class="card-header">
             Update Task
         </div>
@@ -8,14 +8,15 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-lg-10 col-9">
                         {{ form.task_name.label }}
                         {{ form.task_name }}
                     </div>
-                    <div class="col-2 form-check form-switch">
-                        {{ form.completed.label }}
-                        <br>
+                    <div class="col-lg-2 col-3">
+                            {{ form.completed.label }}
+                        <div class="form-check form-switch">
                         {{ form.completed }}
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 3px">
